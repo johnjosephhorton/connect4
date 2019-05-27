@@ -1,29 +1,47 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+from pandas import DataFrame
 
-#white = ⚪
-#black = 
-print("|⚫||⚪|🔴")
-print("|🔴|🔴|🔴|⚫|")
+empty =  "⚪"
+black = "⚫"
+red =  "🔴"
 
-#+----+
-#|    |
-#+----+
-# family = ["You", "Sister", "Mom", "Dad"]
+num_rows = 6
+num_cols = 7
+num_to_win = 4
 
-# 0 = empty
-# 1 = black
-# 2 = red
-# row = [0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1]    
+board = [[empty for i in range(num_cols)] for j in range(num_rows)]
 
-# i = 0
-# sequence = [row[i]] 
-# while i < (len(row) - 1):
-#     if row[i + 1] == row[i]:
-#         sequence.append(row[i + 1])
-#     else:
-#         print(sequence)
-#         sequence = [row[i + 1]]
-#     i = i + 1
-                    
+def WinningPiece(row, column, color):
+    return False 
+
+#def Winner(board):
+    
+
+
+def AddPiece(column, color):
+    spot = num_rows - 1
+    for i in range(num_rows):
+        if board[i][column] != empty:
+            print(spot)
+            spot = i - 1
+            break
+    if spot < 0:
+        print("Sorry - this column is full!")
+        return False
+    else:
+        board[spot][column] = color
+    return True
+
+
+print("Welcome!") 
+print("Black goes first")
+color = black
+while True:
+    print(DataFrame(board))
+    print("")
+    row = int(raw_input("Player %s, select a column (0 to 6)?" % color))
+    if AddPiece(row, color):
+        color = black if color == red else red
+
