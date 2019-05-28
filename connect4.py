@@ -70,8 +70,13 @@ def PlayGame():
     while True:
         print(DataFrame(board))
         print("")
-        column = int(raw_input("Player %s, select a column (0 to 6)?" % color))
-        row = AddPiece(column, color) 
+        try:
+            column = int(raw_input("Player %s, select a column (0 to 6)?" % color))
+            row = AddPiece(column, color)
+        except ValueError:
+            print("Input must be number. Try again.")
+            row = None
+
         if row is not None:
             if IsWinner((row, column), color):
                 print("The winner is %s " % color)
